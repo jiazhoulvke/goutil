@@ -3,11 +3,18 @@ package goutil
 import (
 	"bytes"
 	"math/rand"
+	"time"
 )
 
 const (
 	randomStr = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 )
+
+func init() {
+	rand.Seed(time.Now().UnixNano())
+	rand.Seed(rand.Int63())
+	rand.Seed(time.Now().UnixNano())
+}
 
 //RandomString 生成随机字符串
 func RandomString(length int, randomStrs ...string) string {
