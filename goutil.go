@@ -3,6 +3,7 @@ package goutil
 import (
 	"bytes"
 	"math/rand"
+	"os"
 	"time"
 )
 
@@ -30,4 +31,15 @@ func RandomString(length int, randomStrs ...string) string {
 		b.WriteByte(byte(rs[rand.Intn(rsLen)]))
 	}
 	return b.String()
+}
+
+//IsExist 文件或目录是否存在
+func IsExist(path string) bool {
+	_, err := os.Stat(path)
+	if err != nil {
+		if os.IsNotExist(err) {
+			return false
+		}
+	}
+	return true
 }

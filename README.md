@@ -5,3 +5,4 @@
 ### 列表 ###
 
 - RandomString 生成随机字符串
+- IsExist 文件或目录是否存在
