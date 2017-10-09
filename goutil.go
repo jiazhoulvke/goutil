@@ -14,7 +14,7 @@ const (
 
 func init() {
 	rand.Seed(time.Now().UnixNano())
-	rand.Seed(rand.Int63())
+	time.Sleep(time.Duration(rand.Int63n(9999999999)) * time.Nanosecond)
 	rand.Seed(time.Now().UnixNano())
 }
 
