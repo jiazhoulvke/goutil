@@ -7,3 +7,4 @@
 - RandomString 生成随机字符串
 - IsExist 文件或目录是否存在
 - Mkdir 创建目录
+- CreateParentDir 递归创建上级目录
