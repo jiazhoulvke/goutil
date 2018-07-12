@@ -2,6 +2,7 @@ package goutil
 
 import (
 	"bytes"
+	"encoding/json"
 	"math/rand"
 	"os"
 	"path/filepath"
@@ -60,4 +61,13 @@ func CreateParentDir(p string) error {
 		}
 	}
 	return Mkdir(p)
+}
+
+//JSON 返回对象的JSON字符串
+func JSON(o interface{}) string {
+	bs, err := json.Marshal(o)
+	if err != nil {
+		return ""
+	}
+	return string(bs)
 }
