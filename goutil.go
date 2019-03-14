@@ -3,9 +3,12 @@ package goutil
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"math/rand"
 	"os"
 	"path/filepath"
+	"strconv"
+	"strings"
 	"time"
 )
 
@@ -96,6 +99,73 @@ func InIntSlice(v int, s []int) bool {
 func InInt64Slice(v int64, s []int64) bool {
 	for i := 0; i < len(s); i++ {
 		if v == s[i] {
+			return true
+		}
+	}
+	return false
+}
+
+//JoinIntSlice 类似strings.Join
+func JoinIntSlice(s []int, sep string) string {
+	ss := make([]string, 0, len(s))
+	for i := 0; i < len(s); i++ {
+		ss = append(ss, strconv.Itoa(s[i]))
+	}
+	return strings.Join(ss, sep)
+}
+
+//JoinInt64Slice 类似strings.Join
+func JoinInt64Slice(s []int64, sep string) string {
+	ss := make([]string, 0, len(s))
+	for i := 0; i < len(s); i++ {
+		ss = append(ss, strconv.FormatInt(s[i], 10))
+	}
+	return strings.Join(ss, sep)
+}
+
+//String2IntSlice 字符串转int列表
+func String2IntSlice(str string, sep string) ([]int, error) {
+	sSlice := strings.Split(str, sep)
+	iSlice := make([]int, 0)
+	for _, s := range sSlice {
+		if s == "" {
+			continue
+		}
+		n, err := strconv.Atoi(s)
+		if err != nil {
+			return iSlice, err
+		}
+		iSlice = append(iSlice, n)
+	}
+	return iSlice, nil
+}
+
+//String2Int64Slice 字符串转int64列表
+func String2Int64Slice(str string, sep string) ([]int64, error) {
+	sSlice := strings.Split(str, sep)
+	iSlice := make([]int64, 0)
+	for _, s := range sSlice {
+		if s == "" {
+			continue
+		}
+		n, err := strconv.ParseInt(s, 10, 64)
+		if err != nil {
+			return iSlice, err
+		}
+		iSlice = append(iSlice, n)
+	}
+	return iSlice, nil
+}
+
+//FindInSet 类似mysql的FIND_IN_SET
+func FindInSet(v interface{}, str string) bool {
+	o := fmt.Sprint(v)
+	l := strings.Split(str, ",")
+	for _, s := range l {
+		if s == "" {
+			continue
+		}
+		if o == s {
 			return true
 		}
 	}
