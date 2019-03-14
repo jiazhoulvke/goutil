@@ -71,3 +71,33 @@ func JSON(o interface{}) string {
 	}
 	return string(bs)
 }
+
+//InStringSlice 判断字符串是否在列表中
+func InStringSlice(v string, s []string) bool {
+	for i := 0; i < len(s); i++ {
+		if v == s[i] {
+			return true
+		}
+	}
+	return false
+}
+
+//InIntSlice 判断数字是否在列表中
+func InIntSlice(v int, s []int) bool {
+	for i := 0; i < len(s); i++ {
+		if v == s[i] {
+			return true
+		}
+	}
+	return false
+}
+
+//InInt64Slice 判断数字是否在列表中
+func InInt64Slice(v int64, s []int64) bool {
+	for i := 0; i < len(s); i++ {
+		if v == s[i] {
+			return true
+		}
+	}
+	return false
+}
