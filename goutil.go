@@ -68,11 +68,11 @@ func CreateParentDir(p string) error {
 
 //JSON 返回对象的JSON字符串
 func JSON(o interface{}) string {
-	bs, err := json.Marshal(o)
-	if err != nil {
-		return ""
-	}
-	return string(bs)
+	b := bytes.NewBufferString("")
+	jsonEncoder := json.NewEncoder(b)
+	jsonEncoder.SetEscapeHTML(false)
+	jsonEncoder.Encode(o)
+	return b.String()
 }
 
 //InStringSlice 判断字符串是否在列表中
