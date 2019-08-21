@@ -16,14 +16,9 @@ const (
 	randomStr = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 )
 
-func init() {
-	rand.Seed(time.Now().UnixNano())
-	time.Sleep(time.Duration(rand.Int63n(9999999999)) * time.Nanosecond)
-	rand.Seed(time.Now().UnixNano())
-}
-
 //RandomString 生成随机字符串
 func RandomString(length int, randomStrs ...string) string {
+	rand.Seed(time.Now().UnixNano())
 	var rs string
 	if len(randomStrs) > 0 && len(randomStrs[0]) > 0 {
 		rs = randomStrs[0]
