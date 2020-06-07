@@ -166,3 +166,23 @@ func FindInSet(v interface{}, str string) bool {
 	}
 	return false
 }
+
+//RunesFilter 过滤字符
+// RunesFilter("abc,def!ghi",",!") == "abcdefghi"
+func RunesFilter(s string, cutset string) string {
+	if s == "" || cutset == "" {
+		return s
+	}
+	cutsetRute := []rune(cutset)
+	b := bytes.NewBuffer([]byte(""))
+FORLOOP:
+	for _, r := range []rune(s) {
+		for _, c := range cutsetRute {
+			if c == r {
+				continue FORLOOP
+			}
+		}
+		b.WriteRune(r)
+	}
+	return b.String()
+}
