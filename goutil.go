@@ -186,3 +186,29 @@ FORLOOP:
 	}
 	return b.String()
 }
+
+//IsZipFile 判断是不是zip文件
+func IsZipFile(filename string) (bool, error) {
+	f, err := os.Open(filename)
+	if err != nil {
+		return false, err
+	}
+	defer f.Close()
+	b := make([]byte, 4, 4)
+	n, err := f.Read(b)
+	if err != nil {
+		return false, err
+	}
+	if n != 4 {
+		return false, nil
+	}
+	return IsZipHead(b), nil
+}
+
+//IsZipHead 判断是不是zip文件头
+func IsZipHead(b []byte) bool {
+	if len(b) < 4 {
+		return false
+	}
+	return b[0] == 0x50 && b[1] == 0x4b && b[2] == 0x03 && b[3] == 0x04
+}
